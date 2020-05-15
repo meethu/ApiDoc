@@ -131,7 +131,7 @@ forwardname 端口转发名,必传
 
 响应:
 错误响应同响应示例
-成功响应data返回Status、ProxyIP、ProxyPort、ListenIP、ListenPort、MaxConnNum、RateLimit、ForwardType、UsedBandwidth
+成功响应data返回Status、ProxyIP、ProxyPort、ListenIP、ListenPort、MaxConnNum、RateLimit、ForwardType、UsedBandwidth(单位为KB)
 ```
 
 ### 6.获取端口转发流量日志(名称:get_forward_traffic_logs)
@@ -142,7 +142,7 @@ un_report_log 是否只传递等待上报的端口转发流量日志,选传,默�
 
 响应:
 错误响应同响应示例
-成功响应data返回Info,Info为traffic_logs表记录(所有字段)
+成功响应data返回Info,Info为traffic_logs表记录(所有字段,HourUsedBandwidth单位为KB)
 ```
 
 ### 7.重置端口转发已用流量(名称:reset_forward_bandwidth)
@@ -172,4 +172,17 @@ forwardname 端口转发名,必传
 响应:
 错误响应同响应示例
 成功响应data返回SoftVersion(X Port Forward软件版本)、ServerTime(服务器当前时间)、Author(X Port Forward作者,硬编码为Flyqie)
+```
+
+## 流量上报
+
+``` powershell
+上报为Json,PHP请使用php://input获取.
+示例(HourUsedBandwidth单位为KB):
+{"TrafficLogs":{"23":{"ForwardName":"testhttp","HourUsedBandwidth":0,"Time":"2020-05-15T23:06:33+08:00"},"24":{"ForwardName":"testudp3","HourUsedBandwidth":0,"Time":"2020-05-15T23:06:33+08:00"},"25":{"ForwardName":"testhttp","HourUsedBandwidth":87975.4531,"Time":"2020-05-15T23:09:04+08:00"}},"UsedBandwidth":{"testhttp":7982141.5314,"testudp3":0}}
+
+响应返回:
+json格式:
+成功示例{"success":true}
+错误示例{"success":false,"message":"错误信息"}
 ```
