@@ -115,7 +115,7 @@ forwardname 端口转发名,必传
 
 响应:
 错误响应同响应示例
-成功响应data只返回Status
+成功响应data返回Status及Data(Data内为销毁前结算流量统计数据[ForwardName,HourTrafficBandwidth])
 ```
 注意:该操作同时会删除所有的转发流量记录,请先使用get_forward_traffic_logs相关操作获取流量日志进行流量计费
 
